@@ -6,6 +6,8 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import com.ngonyoku.bookmark.Adapters.BookListAdapter;
@@ -27,6 +29,7 @@ public class BooksListActivity extends AppCompatActivity {
     private static final String TAG = "BooksListActivity";
     private GoogleBooksAPI mBooksAPI;
     private RecyclerView mRecyclerView;
+    private ProgressBar mProgressBar;
 
 
     @Override
@@ -35,6 +38,7 @@ public class BooksListActivity extends AppCompatActivity {
         setContentView(R.layout.activity_books_list);
 
         mRecyclerView = findViewById(R.id.booksRecyclerView);
+        mProgressBar = findViewById(R.id.progressBar);
         mRecyclerView.setHasFixedSize(true);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
 
@@ -51,10 +55,12 @@ public class BooksListActivity extends AppCompatActivity {
     }
 
     private void runSearchQuery(String query) {
+        mProgressBar.setVisibility(View.VISIBLE);
         Call<Books> call = mBooksAPI.getBooks(query);
         call.enqueue(new Callback<Books>() {
             @Override
             public void onResponse(Call<Books> call, Response<Books> response) {
+                mProgressBar.setVisibility(View.GONE);
                 if (!response.isSuccessful()) {
                     Toast.makeText(BooksListActivity.this, "Code" + response.code(), Toast.LENGTH_LONG).show();
                     return;
