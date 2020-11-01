@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">Book Mark</string>
+    <string name="lorem">Book Description. Lorem ipsum dolor sit amet, consectetur adipisicing elit. A aliquam beatae dolore eius illo illum ipsam maiores omnis quo sapiente. Consequatur deserunt dolor eius est et iste, maxime quas! Ducimus!</string>
+    <string name="search">Search</string>
+    <string name="hint_search_for_book">Search e.g Author, BookTitle, Publisher e.t.c</string>
+    <string name="advanced_search">Advanced Search</string>
+    <string name="txt_empty_error">Field cannot be empty</string>
+</resources>
