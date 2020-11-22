@@ -41,13 +41,21 @@ public class BookListAdapter extends RecyclerView.Adapter<BookListAdapter.BookLi
     public void onBindViewHolder(@NonNull BookListViewHolder holder, int position) {
         Items currentBook = bookItems.get(position);
         holder.publishers.setText(currentBook.getVolumeInfo().getPublisher());
-        for (String author : currentBook.getVolumeInfo().getAuthors()) {
-            holder.authors.append(author + "\t");
-        }
-        holder.title.setText(currentBook.getVolumeInfo().getTitle());
+        String title = (currentBook.getVolumeInfo().getTitle() == null)
+                ? "NO Title"
+                : currentBook.getVolumeInfo().getTitle();
+        String[] authors = currentBook.getVolumeInfo().getAuthors();
         String description = (currentBook.getVolumeInfo().getDescription() != null)
                 ? currentBook.getVolumeInfo().getDescription()
                 : "\"---No Description---\"";
+        holder.title.setText(title);
+        if (authors != null) {
+            for (String author : authors) {
+                holder.authors.append(author + "\t");
+            }
+        } else {
+            holder.authors.setText(R.string.txt_no_authors);
+        }
         holder.description.setText(description);
         ImageLinks imageLinks = currentBook.getVolumeInfo().getImageLinks();
         if (imageLinks != null) {
